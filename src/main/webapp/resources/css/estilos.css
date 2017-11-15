@@ -1,0 +1,41 @@
+@charset "ISO-8859-1";
+
+html, body {
+	height: 100%;
+}
+
+.logo {
+	margin-left: 20px;
+	position: absolute;
+}
+
+.conteudo {
+	overflow: hidden;
+	min-height: 100%;
+	position: absolute;
+	width: 800px;
+}
+
+.page-footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+}
+
+.login {
+	width: 400px;
+	height: 300px;
+	margin-top: 10%;
+	border: 2px solid #689f38;
+	padding: 10px;
+	background: #fff;
+}
+
+.cadastro-usuario {
+	width: 800px;
+	height: 300px;
+	margin-top: 10%;
+	border: 1px solid #ee6e73;
+	padding: 10px;
+	background: #fff;
+}

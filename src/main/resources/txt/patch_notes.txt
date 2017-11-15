@@ -1,0 +1,5 @@
+	VERSÃO - 1.0.0_1
+		1 - Adicionado changelogs.
+		2 - Versão de desenvolvimento.
+		3 - FlyWay funcionando corretamente.
+		

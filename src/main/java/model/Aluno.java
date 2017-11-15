@@ -1,12 +1,16 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -25,13 +29,23 @@ public class Aluno {
 	@Temporal(TemporalType.DATE)
 	private Date data_nascimento;
 
-	private String telefone;
-	private String email;
-	private String endereco;
+	@OneToMany(mappedBy = "aluno", targetEntity = Telefone.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Telefone> telefones;
+	@OneToMany(mappedBy = "aluno", targetEntity = Email.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Email> emails;
+	@OneToMany(mappedBy = "aluno", targetEntity = Endereco.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Endereco> enderecos;
 
 	private boolean ativo;
 
-	@OneToOne(fetch = FetchType.LAZY)
+	public Aluno() {
+		telefones = new ArrayList<Telefone>();
+		emails = new ArrayList<Email>();
+		enderecos = new ArrayList<Endereco>();
+		ativo = true;
+	}
+
+	@OneToOne (fetch = FetchType.LAZY, mappedBy="aluno", cascade = CascadeType.ALL)
 	private Aluguel aluguel;
 
 	public Long getId_aluno() {
@@ -58,28 +72,28 @@ public class Aluno {
 		this.data_nascimento = data_nascimento;
 	}
 
-	public String getEmail() {
-		return email;
+	public final List<Telefone> getTelefones() {
+		return telefones;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public final void setTelefones(List<Telefone> telefones) {
+		this.telefones = telefones;
 	}
 
-	public String getTelefone() {
-		return telefone;
+	public final List<Email> getEmails() {
+		return emails;
 	}
 
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
+	public final void setEmails(List<Email> emails) {
+		this.emails = emails;
 	}
 
-	public String getEndereco() {
-		return endereco;
+	public final List<Endereco> getEnderecos() {
+		return enderecos;
 	}
 
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
+	public final void setEnderecos(List<Endereco> enderecos) {
+		this.enderecos = enderecos;
 	}
 
 	public Aluguel getAluguel() {

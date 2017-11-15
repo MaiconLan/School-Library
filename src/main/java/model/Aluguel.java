@@ -23,7 +23,7 @@ public class Aluguel {
 	private Date data_retirada;
 	private Date data_devolucao;
 
-	@OneToOne (fetch = FetchType.LAZY, mappedBy="aluguel", cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.LAZY)
 	private Aluno aluno;
 	
 	@OneToOne (fetch = FetchType.LAZY, mappedBy="aluguel", cascade = CascadeType.ALL)
