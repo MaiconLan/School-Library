@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+<head>
+<title>Login</title>
+</head>
+<body>
+
+	<ui:composition template="/template/layout.xhtml">
+		<ui:define name="conteudo">
+			<h:form styleClass="login">
+				<p:messages id="messages" />
+
+				<h:panelGrid columns="1">
+						<p:inputText styleClass="input-field col s6" id="usuario"
+							placeholder="Usuário"></p:inputText>
+
+						<p:password styleClass="input-field col s12" placeholder="Senha" />
+
+						<h:panelGrid columns="2">
+							<h:commandLink styleClass="waves-effect waves-light btn"
+								value="Login">
+								<i class="material-icons prefix">person</i>
+							</h:commandLink>
+
+						</h:panelGrid>
+				</h:panelGrid>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+
+</body>
+</html>
