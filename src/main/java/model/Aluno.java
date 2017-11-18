@@ -16,6 +16,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import utils.Constante;
+
 @Entity
 @Table(name = "aluno")
 public class Aluno {
@@ -35,6 +37,8 @@ public class Aluno {
 	private List<Email> emails;
 	@OneToMany(mappedBy = "aluno", targetEntity = Endereco.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Endereco> enderecos;
+	@OneToMany(mappedBy = "aluno", targetEntity = Aluguel.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private List<Aluguel> alugeis;
 
 	private boolean ativo;
 
@@ -42,10 +46,10 @@ public class Aluno {
 		telefones = new ArrayList<Telefone>();
 		emails = new ArrayList<Email>();
 		enderecos = new ArrayList<Endereco>();
-		ativo = true;
+		ativo = Constante.ATIVO;
 	}
 
-	@OneToOne (fetch = FetchType.LAZY, mappedBy="aluno", cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.LAZY)
 	private Aluguel aluguel;
 
 	public Long getId_aluno() {
@@ -110,6 +114,21 @@ public class Aluno {
 
 	public void setAtivo(boolean ativo) {
 		this.ativo = ativo;
+	}
+
+	public final List<Aluguel> getAlugeis() {
+		return alugeis;
+	}
+
+	public final void setAlugeis(List<Aluguel> alugeis) {
+		this.alugeis = alugeis;
+	}
+
+	@Override
+	public String toString() {
+		return "Aluno [id_aluno=" + id_aluno + ", nome_completo=" + nome_completo + ", data_nascimento="
+				+ data_nascimento + ", telefones=" + telefones + ", emails=" + emails + ", enderecos=" + enderecos
+				+ ", ativo=" + ativo + ", aluguel=" + aluguel + "]";
 	}
 
 }

@@ -1,5 +1,8 @@
-	VERSÃO - 1.0.0_1
+	VERSÃO - 1.0.0.1
 		1 - Adicionado changelogs.
 		2 - Versão de desenvolvimento.
 		3 - FlyWay funcionando corretamente.
 		
+	VERSÃO - 1.0.1.1
+		1 - Adicionados pacotes business.
+		2 - Renomeado pacote view para controller.

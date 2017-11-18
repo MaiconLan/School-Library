@@ -1,25 +1,22 @@
-package view;
+package controller;
 
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.inject.Named;
 
-import dao.AlunoDao;
-import dao.EmailDao;
-import dao.EnderecoDao;
-import dao.TelefoneDao;
+import business.AlunoBusiness;
 import model.Aluno;
 import model.Email;
 import model.Endereco;
 import model.Telefone;
 
-@ViewScoped
-@ManagedBean(name = "alunoWebBean")
+@RequestScoped
+@Named(value= "alunoWebBean")
 public class AlunoWebBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -28,14 +25,9 @@ public class AlunoWebBean implements Serializable {
 	private Email email;
 	private Telefone telefone;
 	private Endereco endereco;
+
 	@Inject
-	private AlunoDao alunoDao;
-	@Inject
-	private EmailDao emailDao;
-	@Inject
-	private TelefoneDao telefoneDao;
-	@Inject
-	private EnderecoDao enderecoDao;
+	private AlunoBusiness alunoBusinnes;
 
 	@PostConstruct
 	public void initialize() {
@@ -43,7 +35,6 @@ public class AlunoWebBean implements Serializable {
 		email = new Email();
 		telefone = new Telefone();
 		endereco = new Endereco();
-		alunoDao = new AlunoDao();
 	}
 
 	public void adicionarTelefone() {
@@ -65,14 +56,13 @@ public class AlunoWebBean implements Serializable {
 	}
 
 	public void salvar() {
-		if (aluno.getId_aluno() == null) {
-			alunoDao.save(aluno);
+		if (aluno == null) {
+			alunoBusinnes.salvar(aluno);
 			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_INFO, "Salvo", "Aluno cadastrado com sucesso"));
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Salvo", "Aluno salvo com sucesso!"));
 		} else {
-			alunoDao.update(aluno);
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_INFO, "Salvo", "Aluno salvo com sucesso"));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+					"Campos em branco!", "Aluno não contém campos válidos!"));
 		}
 
 		aluno = new Aluno();
@@ -108,14 +98,6 @@ public class AlunoWebBean implements Serializable {
 
 	public final void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
-	}
-
-	public final AlunoDao getAlunoDao() {
-		return alunoDao;
-	}
-
-	public final void setAlunoDao(AlunoDao alunoDao) {
-		this.alunoDao = alunoDao;
 	}
 
 }

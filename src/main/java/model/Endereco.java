@@ -46,4 +46,9 @@ public class Endereco {
 		this.aluno = aluno;
 	}
 
+	@Override
+	public String toString() {
+		return endereco;
+	}
+
 }

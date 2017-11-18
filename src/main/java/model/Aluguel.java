@@ -2,13 +2,12 @@ package model;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -23,10 +22,10 @@ public class Aluguel {
 	private Date data_retirada;
 	private Date data_devolucao;
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Aluno aluno;
 	
-	@OneToOne (fetch = FetchType.LAZY, mappedBy="aluguel", cascade = CascadeType.ALL)
+	@ManyToOne (fetch = FetchType.LAZY)
 	private Livro livro;
 
 	public Long getId_aluguel() {

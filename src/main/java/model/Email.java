@@ -45,4 +45,11 @@ public class Email {
 		this.aluno = aluno;
 	}
 
+	@Override
+	public String toString() {
+		return email;
+	}
+	
+	
+
 }

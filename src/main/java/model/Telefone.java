@@ -46,4 +46,9 @@ public class Telefone {
 		this.aluno = aluno;
 	}
 
+	@Override
+	public String toString() {
+		return telefone;
+	}
+
 }

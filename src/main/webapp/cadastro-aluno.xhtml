@@ -12,40 +12,42 @@
 <body>
 	<ui:composition template="/template/layout.xhtml">
 		<ui:define name="conteudo">
+			<p:messages id="messages" />
 			<h:form styleClass="cadastro-usuario" id="aluno">
-				<p:messages id="messages" />
-
 				<h:panelGrid columns="2">
 					<p:inputText styleClass="input-field col s6" id="nome"
 						placeholder="Nome" value="#{alunoWebBean.aluno.nome_completo}" />
 
 					<p:calendar id="data" value="#{alunoWebBean.aluno.data_nascimento}"
 						pattern="dd/MM/yyyy" mask="true" placeholder="Data de Nascimento" />
+					<h:form id="botoes">
+						<h:panelGrid columns="2">
+							<p:inputMask placeholder="Telefone" mask="(99) ?9 9999-9999"
+								id="telefone" value="#{alunoWebBean.telefone.telefone}"
+								required="true" requiredMessage="Não deixe campos em Branco" />
+							<p:commandButton
+								actionListener="#{alunoWebBean.adicionarTelefone()}"
+								update="botoes" icon="ui-icon-check" title="Adicionar Telefone" />
 
-					<h:panelGrid columns="2">
-						<p:inputMask placeholder="Telefone" mask="(99) ?9 9999-9999"
-							id="telefone" value="#{alunoWebBean.telefone.telefone}"
-							required="true" requiredMessage="Não deixe campos em Branco" />
-						<p:commandButton
-							actionListener="#{alunoWebBean.adicionarTelefone()}"
-							update="messages" icon="ui-icon-check" title="Adicionar Telefone" />
+							<p:inputText styleClass="input-field col s6" id="endereco"
+								placeholder="Endereço" value="#{alunoWebBean.endereco.endereco}" />
+							<p:commandButton
+								actionListener="#{alunoWebBean.adicionarEndereco()}"
+								update="botoes" icon="ui-icon-check" title="Adicionar Endereço" />
 
-						<p:inputText styleClass="input-field col s6" id="endereco"
-							placeholder="Endereço" value="#{alunoWebBean.endereco.endereco}" />
-						<p:commandButton
-							actionListener="#{alunoWebBean.adicionarEndereco()}"
-							update="messages" icon="ui-icon-check" title="Adicionar Endereço" />
+							<p:inputText styleClass="validate" type="email"
+								value="#{alunoWebBean.email.email}" placeholder="E-mail" />
+							<p:commandButton
+								actionListener="#{alunoWebBean.adicionarEmail()}"
+								update="botoes" icon="ui-icon-check" title="Adicionar E-mail" />
+						</h:panelGrid>
+					</h:form>
 
-						<p:inputText styleClass="validate" type="email"
-							value="#{alunoWebBean.email.email}" placeholder="E-mail" />
-						<p:commandButton actionListener="#{alunoWebBean.adicionarEmail()}"
-							update="messages" icon="ui-icon-check" title="Adicionar E-mail" />
-					</h:panelGrid>
 
 					<p:commandLink styleClass="waves-effect waves-light btn"
 						value="Cadastrar" actionListener="#{alunoWebBean.salvar}">
 						<i class="material-icons prefix">person</i>
-						<p:ajax event="click" update="@form" />
+						<p:ajax event="click" update="aluno" />
 					</p:commandLink>
 
 				</h:panelGrid>
