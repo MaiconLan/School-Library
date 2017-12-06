@@ -3,6 +3,7 @@ package model;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -17,7 +18,8 @@ public class Genero {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id_genero;
+	@Column(name = "id_genero")
+	private Long idGenero;
 
 	private String titulo;
 	private String descricao;
@@ -25,12 +27,12 @@ public class Genero {
 	@OneToMany(mappedBy = "genero", targetEntity = Livro.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Livro> livros;
 
-	public Long getId_genero() {
-		return id_genero;
+	public final Long getIdGenero() {
+		return idGenero;
 	}
 
-	public void setId_genero(Long id_genero) {
-		this.id_genero = id_genero;
+	public final void setIdGenero(Long idGenero) {
+		this.idGenero = idGenero;
 	}
 
 	public String getTitulo() {

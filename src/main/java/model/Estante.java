@@ -3,6 +3,7 @@ package model;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -17,53 +18,57 @@ public class Estante {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id_estante;
+	@Column(name = "id_estante")
+	private Long idEstante;
 
 	private String descricao;
-	private String posicao_horizontal;
 
-	private String posicao_vertical;
+	@Column(name = "posicao_horizontal")
+	private String posicaoHorizontal;
+
+	@Column(name = "posicao_vertical")
+	private String posicaoVertical;
 
 	@OneToMany(mappedBy = "estante", targetEntity = Livro.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Livro> livros;
 
-	public Long getId_estante() {
-		return id_estante;
+	public final Long getIdEstante() {
+		return idEstante;
 	}
 
-	public void setId_estante(Long id_estante) {
-		this.id_estante = id_estante;
+	public final void setIdEstante(Long idEstante) {
+		this.idEstante = idEstante;
 	}
 
-	public String getDescricao() {
+	public final String getDescricao() {
 		return descricao;
 	}
 
-	public void setDescricao(String descricao) {
+	public final void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
 
-	public String getPosicao_horizontal() {
-		return posicao_horizontal;
+	public final String getPosicaoHorizontal() {
+		return posicaoHorizontal;
 	}
 
-	public void setPosicao_horizontal(String posicao_horizontal) {
-		this.posicao_horizontal = posicao_horizontal;
+	public final void setPosicaoHorizontal(String posicaoHorizontal) {
+		this.posicaoHorizontal = posicaoHorizontal;
 	}
 
-	public String getPosicao_vertical() {
-		return posicao_vertical;
+	public final String getPosicaoVertical() {
+		return posicaoVertical;
 	}
 
-	public void setPosicao_vertical(String posicao_vertical) {
-		this.posicao_vertical = posicao_vertical;
+	public final void setPosicaoVertical(String posicaoVertical) {
+		this.posicaoVertical = posicaoVertical;
 	}
 
-	public List<Livro> getLivros() {
+	public final List<Livro> getLivros() {
 		return livros;
 	}
 
-	public void setLivros(List<Livro> livros) {
+	public final void setLivros(List<Livro> livros) {
 		this.livros = livros;
 	}
 

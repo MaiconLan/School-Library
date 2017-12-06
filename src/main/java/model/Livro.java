@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -23,15 +24,19 @@ public class Livro {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id_livro;
+	@Column(name = "id_livro")
+	private Long idLivro;
 
 	private String titulo;
 	private String subtitulo;
-	private Integer qtd_paginas;
+
+	@Column(name = "qtd_paginas")
+	private Integer qtdPaginas;
 	private int estoque;
 
-	@Temporal(value = TemporalType.DATE)
-	private Date data_publicacao;
+	@Temporal(TemporalType.DATE)
+	@Column(name = "data_publicacao")
+	private Date dataPublicacao;
 
 	@ManyToOne
 	@JoinColumn(name = "id_estante")
@@ -47,76 +52,68 @@ public class Livro {
 	@ManyToMany(mappedBy = "livros")
 	private List<Autor> autores;
 
-	public Long getId_livro() {
-		return id_livro;
+	public final Long getIdLivro() {
+		return idLivro;
 	}
 
-	public void setId_livro(Long id_livro) {
-		this.id_livro = id_livro;
+	public final void setIdLivro(Long idLivro) {
+		this.idLivro = idLivro;
 	}
 
-	public String getTitulo() {
+	public final String getTitulo() {
 		return titulo;
 	}
 
-	public void setTitulo(String titulo) {
+	public final void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
 
-	public String getSubtitulo() {
+	public final String getSubtitulo() {
 		return subtitulo;
 	}
 
-	public void setSubtitulo(String subtitulo) {
+	public final void setSubtitulo(String subtitulo) {
 		this.subtitulo = subtitulo;
 	}
 
-	public Integer getQtd_paginas() {
-		return qtd_paginas;
+	public final Integer getQtdPaginas() {
+		return qtdPaginas;
 	}
 
-	public void setQtd_paginas(Integer qtd_paginas) {
-		this.qtd_paginas = qtd_paginas;
+	public final void setQtdPaginas(Integer qtdPaginas) {
+		this.qtdPaginas = qtdPaginas;
 	}
 
-	public int getEstoque() {
+	public final int getEstoque() {
 		return estoque;
 	}
 
-	public void setEstoque(int estoque) {
+	public final void setEstoque(int estoque) {
 		this.estoque = estoque;
 	}
 
-	public Date getData_publicacao() {
-		return data_publicacao;
+	public final Date getDataPublicacao() {
+		return dataPublicacao;
 	}
 
-	public void setData_publicacao(Date data_publicacao) {
-		this.data_publicacao = data_publicacao;
+	public final void setDataPublicacao(Date dataPublicacao) {
+		this.dataPublicacao = dataPublicacao;
 	}
 
-	public Estante getEstante() {
+	public final Estante getEstante() {
 		return estante;
 	}
 
-	public void setEstante(Estante estante) {
+	public final void setEstante(Estante estante) {
 		this.estante = estante;
 	}
 
-	public Genero getGenero() {
+	public final Genero getGenero() {
 		return genero;
 	}
 
-	public void setGenero(Genero genero) {
+	public final void setGenero(Genero genero) {
 		this.genero = genero;
-	}
-
-	public List<Autor> getAutores() {
-		return autores;
-	}
-
-	public void setAutores(List<Autor> autores) {
-		this.autores = autores;
 	}
 
 	public final List<Aluguel> getAlugeis() {
@@ -125,6 +122,14 @@ public class Livro {
 
 	public final void setAlugeis(List<Aluguel> alugeis) {
 		this.alugeis = alugeis;
+	}
+
+	public final List<Autor> getAutores() {
+		return autores;
+	}
+
+	public final void setAutores(List<Autor> autores) {
+		this.autores = autores;
 	}
 
 }

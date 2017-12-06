@@ -21,11 +21,11 @@ public class AlunoDao extends GenericDAO<Aluno> {
 	}
 
 	public StringBuilder populaFiltros(Aluno filtro, StringBuilder hql) {
-		if (isNotNull(filtro.getId_aluno())) {
-			hql.append(" AND a.id_aluno = " + filtro.getId_aluno());
+		if (isNotNull(filtro.getIdAluno())) {
+			hql.append(" AND a.id_aluno = " + filtro.getIdAluno());
 		}
-		if (isNotNull(filtro.getNome_completo())) {
-			hql.append(" AND a.nome_completo ILIKE = '" + filtro.getNome_completo() + "%'");
+		if (isNotNull(filtro.getNome())) {
+			hql.append(" AND a.nome ILIKE = '" + filtro.getNome() + "%'");
 		}
 		return hql;
 	}

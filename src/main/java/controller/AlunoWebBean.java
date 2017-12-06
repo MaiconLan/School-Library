@@ -3,11 +3,10 @@ package controller;
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-import javax.inject.Inject;
-import javax.inject.Named;
 
 import business.AlunoBusiness;
 import model.Aluno;
@@ -16,7 +15,7 @@ import model.Endereco;
 import model.Telefone;
 
 @RequestScoped
-@Named(value= "alunoWebBean")
+@ManagedBean(name = "alunoWebBean")
 public class AlunoWebBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -26,11 +25,11 @@ public class AlunoWebBean implements Serializable {
 	private Telefone telefone;
 	private Endereco endereco;
 
-	@Inject
 	private AlunoBusiness alunoBusinnes;
 
 	@PostConstruct
 	public void initialize() {
+		alunoBusinnes = new AlunoBusiness();
 		aluno = new Aluno();
 		email = new Email();
 		telefone = new Telefone();
@@ -38,34 +37,33 @@ public class AlunoWebBean implements Serializable {
 	}
 
 	public void adicionarTelefone() {
-		telefone.setAluno(aluno);
 		aluno.getTelefones().add(telefone);
+		telefone.setAluno(aluno);
 		telefone = new Telefone();
 	}
 
 	public void adicionarEmail() {
-		email.setAluno(aluno);
 		aluno.getEmails().add(email);
+		email.setAluno(aluno);
 		email = new Email();
 	}
 
 	public void adicionarEndereco() {
-		endereco.setAluno(aluno);
 		aluno.getEnderecos().add(endereco);
+		endereco.setAluno(aluno);
 		endereco = new Endereco();
 	}
 
 	public void salvar() {
-		if (aluno == null) {
-			alunoBusinnes.salvar(aluno);
+		if (alunoBusinnes.salvarAluno(aluno)) {
 			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_INFO, "Salvo", "Aluno salvo com sucesso!"));
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Salvo", "Registro salvo com sucesso!"));
+			aluno = new Aluno();
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-					"Campos em branco!", "Aluno não contém campos válidos!"));
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Erro ao salvar registro!"));
 		}
 
-		aluno = new Aluno();
 	}
 
 	public Aluno getAluno() {

@@ -1,6 +1,8 @@
 package model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,20 +16,21 @@ public class Endereco {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id_endereco;
+	@Column(name = "id_endereco")
+	private Long idEndereco;
 
 	private String endereco;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)  
 	@JoinColumn(name = "id_aluno")
 	private Aluno aluno;
 
-	public Long getId_endereco() {
-		return id_endereco;
+	public final Long getIdEndereco() {
+		return idEndereco;
 	}
 
-	public void setId_endereco(Long id_endereco) {
-		this.id_endereco = id_endereco;
+	public final void setIdEndereco(Long idEndereco) {
+		this.idEndereco = idEndereco;
 	}
 
 	public String getEndereco() {

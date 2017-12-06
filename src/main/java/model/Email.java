@@ -1,6 +1,8 @@
 package model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,22 +13,24 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "email")
 public class Email {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id_email;
+	@Column(name = "id_email")
+	private Long idEmail;
 
 	private String email;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)  
 	@JoinColumn(name = "id_aluno")
 	private Aluno aluno;
 
-	public Long getId_email() {
-		return id_email;
+	public final Long getIdEmail() {
+		return idEmail;
 	}
 
-	public void setId_email(Long id_email) {
-		this.id_email = id_email;
+	public final void setIdEmail(Long idEmail) {
+		this.idEmail = idEmail;
 	}
 
 	public String getEmail() {
@@ -49,7 +53,5 @@ public class Email {
 	public String toString() {
 		return email;
 	}
-	
-	
 
 }

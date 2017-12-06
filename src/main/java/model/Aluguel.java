@@ -2,6 +2,7 @@ package model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -9,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "aluguel")
@@ -16,63 +19,70 @@ public class Aluguel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id_aluguel;
+	@Column(name = "id_aluguel")
+	private Long idAluguel;
 
 	private Double multa;
-	private Date data_retirada;
-	private Date data_devolucao;
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "data_retirada")
+	private Date dataRetirada;
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "data_devolucao")
+	private Date dataDevolucao;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Aluno aluno;
-	
-	@ManyToOne (fetch = FetchType.LAZY)
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Livro livro;
 
-	public Long getId_aluguel() {
-		return id_aluguel;
+	public final Long getIdAluguel() {
+		return idAluguel;
 	}
 
-	public void setId_aluguel(Long id_aluguel) {
-		this.id_aluguel = id_aluguel;
+	public final void setIdAluguel(Long idAluguel) {
+		this.idAluguel = idAluguel;
 	}
 
-	public Double getMulta() {
+	public final Double getMulta() {
 		return multa;
 	}
 
-	public void setMulta(Double multa) {
+	public final void setMulta(Double multa) {
 		this.multa = multa;
 	}
 
-	public Date getData_retirada() {
-		return data_retirada;
+	public final Date getDataRetirada() {
+		return dataRetirada;
 	}
 
-	public void setData_retirada(Date data_retirada) {
-		this.data_retirada = data_retirada;
+	public final void setDataRetirada(Date dataRetirada) {
+		this.dataRetirada = dataRetirada;
 	}
 
-	public Date getData_devolucao() {
-		return data_devolucao;
+	public final Date getDataDevolucao() {
+		return dataDevolucao;
 	}
 
-	public void setData_devolucao(Date data_devolucao) {
-		this.data_devolucao = data_devolucao;
+	public final void setDataDevolucao(Date dataDevolucao) {
+		this.dataDevolucao = dataDevolucao;
 	}
 
-	public Aluno getAluno() {
+	public final Aluno getAluno() {
 		return aluno;
 	}
 
-	public void setAluno(Aluno aluno) {
+	public final void setAluno(Aluno aluno) {
 		this.aluno = aluno;
 	}
 
-	public Livro getLivro() {
+	public final Livro getLivro() {
 		return livro;
 	}
 
-	public void setLivro(Livro livro) {
+	public final void setLivro(Livro livro) {
 		this.livro = livro;
 	}
 

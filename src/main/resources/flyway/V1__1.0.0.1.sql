@@ -41,7 +41,7 @@ ALTER TABLE public.livro OWNER TO postgres;
 -- DROP TABLE IF EXISTS public.autor CASCADE;
 CREATE TABLE public.autor(
 	id_autor serial NOT NULL,
-	nome_completo character varying NOT NULL,
+	nome character varying NOT NULL,
 	data_nascimento date,
 	data_obito date,
 	CONSTRAINT pk_autor PRIMARY KEY (id_autor)
@@ -124,7 +124,7 @@ ON DELETE SET NULL ON UPDATE CASCADE;
 -- DROP TABLE IF EXISTS public.aluno CASCADE;
 CREATE TABLE public.aluno(
 	id_aluno serial NOT NULL,
-	nome_completo character varying NOT NULL,
+	nome character varying NOT NULL,
 	data_nascimento date,
 	ativo boolean NOT NULL DEFAULT true,
 	CONSTRAINT pk_aluno PRIMARY KEY (id_aluno)

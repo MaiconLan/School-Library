@@ -1,6 +1,8 @@
 package model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,20 +16,21 @@ public class Telefone {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id_telefone;
+	@Column(name = "id_telefone")
+	private Long idTelefone;
 
 	private String telefone;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)  
 	@JoinColumn(name = "id_aluno")
 	private Aluno aluno;
 
-	public Long getId_telefone() {
-		return id_telefone;
+	public final Long getIdTelefone() {
+		return idTelefone;
 	}
 
-	public void setId_telefone(Long id_telefone) {
-		this.id_telefone = id_telefone;
+	public final void setIdTelefone(Long idTelefone) {
+		this.idTelefone = idTelefone;
 	}
 
 	public String getTelefone() {

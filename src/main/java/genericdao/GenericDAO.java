@@ -14,7 +14,7 @@ import jpautil.PersistenceUtil;
 
 public class GenericDAO<T> {
 	protected static Criteria filtro;
-	protected static EntityManager em;
+	protected static EntityManager em = PersistenceUtil.currentEntityManager();
 	protected Class<T> clazz;
 
 	/**
@@ -24,7 +24,6 @@ public class GenericDAO<T> {
 	@SuppressWarnings("unchecked")
 	public GenericDAO() {
 		try {
-			em = PersistenceUtil.currentEntityManager();
 			this.clazz = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
 
 		} catch (PersistenceException e) {

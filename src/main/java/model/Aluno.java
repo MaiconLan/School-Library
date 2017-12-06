@@ -5,13 +5,13 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,20 +24,22 @@ public class Aluno {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id_aluno;
+	@Column(name = "id_aluno")
+	private Long idAluno;
 
-	private String nome_completo;
+	private String nome;
 
 	@Temporal(TemporalType.DATE)
-	private Date data_nascimento;
+	@Column(name = "data_nascimento")
+	private Date dataNascimento;
 
-	@OneToMany(mappedBy = "aluno", targetEntity = Telefone.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "aluno", targetEntity = Telefone.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Telefone> telefones;
-	@OneToMany(mappedBy = "aluno", targetEntity = Email.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "aluno", targetEntity = Email.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Email> emails;
-	@OneToMany(mappedBy = "aluno", targetEntity = Endereco.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "aluno", targetEntity = Endereco.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Endereco> enderecos;
-	@OneToMany(mappedBy = "aluno", targetEntity = Aluguel.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "aluno", targetEntity = Aluguel.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Aluguel> alugeis;
 
 	private boolean ativo;
@@ -49,31 +51,28 @@ public class Aluno {
 		ativo = Constante.ATIVO;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY)
-	private Aluguel aluguel;
-
-	public Long getId_aluno() {
-		return id_aluno;
+	public final Long getIdAluno() {
+		return idAluno;
 	}
 
-	public void setId_aluno(Long id_aluno) {
-		this.id_aluno = id_aluno;
+	public final void setIdAluno(Long idAluno) {
+		this.idAluno = idAluno;
 	}
 
-	public String getNome_completo() {
-		return nome_completo;
+	public final String getNome() {
+		return nome;
 	}
 
-	public void setNome_completo(String nome_completo) {
-		this.nome_completo = nome_completo;
+	public final void setNome(String nome) {
+		this.nome = nome;
 	}
 
-	public Date getData_nascimento() {
-		return data_nascimento;
+	public final Date getDataNascimento() {
+		return dataNascimento;
 	}
 
-	public void setData_nascimento(Date data_nascimento) {
-		this.data_nascimento = data_nascimento;
+	public final void setDataNascimento(Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}
 
 	public final List<Telefone> getTelefones() {
@@ -100,22 +99,6 @@ public class Aluno {
 		this.enderecos = enderecos;
 	}
 
-	public Aluguel getAluguel() {
-		return aluguel;
-	}
-
-	public void setAluguel(Aluguel aluguel) {
-		this.aluguel = aluguel;
-	}
-
-	public boolean isAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(boolean ativo) {
-		this.ativo = ativo;
-	}
-
 	public final List<Aluguel> getAlugeis() {
 		return alugeis;
 	}
@@ -124,11 +107,18 @@ public class Aluno {
 		this.alugeis = alugeis;
 	}
 
+	public final boolean isAtivo() {
+		return ativo;
+	}
+
+	public final void setAtivo(boolean ativo) {
+		this.ativo = ativo;
+	}
+
 	@Override
 	public String toString() {
-		return "Aluno [id_aluno=" + id_aluno + ", nome_completo=" + nome_completo + ", data_nascimento="
-				+ data_nascimento + ", telefones=" + telefones + ", emails=" + emails + ", enderecos=" + enderecos
-				+ ", ativo=" + ativo + ", aluguel=" + aluguel + "]";
+		return "Aluno [idAluno=" + idAluno + ", nome=" + nome + ", dataNascimento=" + dataNascimento + ", telefones="
+				+ telefones + ", emails=" + emails + ", enderecos=" + enderecos + ", ativo=" + ativo + "]";
 	}
 
 }

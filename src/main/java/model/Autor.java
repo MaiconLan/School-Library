@@ -3,6 +3,7 @@ package model;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,60 +18,71 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "autor")
 public class Autor {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id_autor;
+	@Column(name = "id_autor")
+	private Long idAutor;
 
-	private String nome_completo;
+	private String nome;
 
 	@Temporal(TemporalType.DATE)
-	private Date data_nascimento;
+	@Column(name = "data_nascimento")
+	private Date dataNascimento;
+
 	@Temporal(TemporalType.DATE)
-	private Date data_obito;
+	@Column(name = "data_obito")
+	private Date dataObito;
 
 	@ManyToMany
 	@JoinTable(name = "muitos_autores_tem_muitos_livros", joinColumns = {
 			@JoinColumn(name = "id_autor") }, inverseJoinColumns = { @JoinColumn(name = "id_livro") })
 	private List<Livro> livros;
 
-	public Long getId_autor() {
-		return id_autor;
+	public final Long getIdAutor() {
+		return idAutor;
 	}
 
-	public void setId_autor(Long id_autor) {
-		this.id_autor = id_autor;
+	public final void setIdAutor(Long idAutor) {
+		this.idAutor = idAutor;
 	}
 
-	public String getNome_completo() {
-		return nome_completo;
+	public final String getNome() {
+		return nome;
 	}
 
-	public void setNome_completo(String nome_completo) {
-		this.nome_completo = nome_completo;
+	public final void setNome(String nome) {
+		this.nome = nome;
 	}
 
-	public Date getData_nascimento() {
-		return data_nascimento;
+	public final Date getDataNascimento() {
+		return dataNascimento;
 	}
 
-	public void setData_nascimento(Date data_nascimento) {
-		this.data_nascimento = data_nascimento;
+	public final void setDataNascimento(Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}
 
-	public Date getData_obito() {
-		return data_obito;
+	public final Date getDataObito() {
+		return dataObito;
 	}
 
-	public void setData_obito(Date data_obito) {
-		this.data_obito = data_obito;
+	public final void setDataObito(Date dataObito) {
+		this.dataObito = dataObito;
 	}
 
-	public List<Livro> getLivros() {
+	public final List<Livro> getLivros() {
 		return livros;
 	}
 
-	public void setLivros(List<Livro> livros) {
+	public final void setLivros(List<Livro> livros) {
 		this.livros = livros;
+	}
+
+	@Override
+	public String toString() {
+		return "Autor [idAutor=" + idAutor + ", nome=" + nome + ", dataNascimento=" + dataNascimento + ", dataObito="
+				+ dataObito + "]";
 	}
 
 }

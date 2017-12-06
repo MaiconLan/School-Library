@@ -9,7 +9,7 @@ public class Main {
 
 		AlunoBusiness a = new AlunoBusiness();
 		Aluno filtro = new Aluno();
-		filtro.setId_aluno(1L);
+		filtro.setIdAluno(1L);
 		
 		for (Aluno aa : a.listaAluno(filtro)) {
 			System.out.println("------------------ID------------------");
@@ -18,7 +18,7 @@ public class Main {
 		}
 		
 		filtro = new Aluno();
-		filtro.setNome_completo("Maicon");
+		filtro.setNome("Maicon");
 		for (Aluno aa : a.listaAluno(filtro)) {
 			System.out.println("-----------------NOME----------------");
 			System.out.println(aa);
