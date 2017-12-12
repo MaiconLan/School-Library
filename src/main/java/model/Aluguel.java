@@ -24,13 +24,11 @@ public class Aluguel {
 
 	private Double multa;
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "data_retirada")
-	private Date dataRetirada;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date retirada;
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "data_devolucao")
-	private Date dataDevolucao;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date devolucao;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Aluno aluno;
@@ -38,51 +36,51 @@ public class Aluguel {
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Livro livro;
 
-	public final Long getIdAluguel() {
+	public Long getIdAluguel() {
 		return idAluguel;
 	}
 
-	public final void setIdAluguel(Long idAluguel) {
+	public void setIdAluguel(Long idAluguel) {
 		this.idAluguel = idAluguel;
 	}
 
-	public final Double getMulta() {
+	public Double getMulta() {
 		return multa;
 	}
 
-	public final void setMulta(Double multa) {
+	public void setMulta(Double multa) {
 		this.multa = multa;
 	}
 
-	public final Date getDataRetirada() {
-		return dataRetirada;
+	public Date getRetirada() {
+		return retirada;
 	}
 
-	public final void setDataRetirada(Date dataRetirada) {
-		this.dataRetirada = dataRetirada;
+	public void setRetirada(Date retirada) {
+		this.retirada = retirada;
 	}
 
-	public final Date getDataDevolucao() {
-		return dataDevolucao;
+	public Date getDevolucao() {
+		return devolucao;
 	}
 
-	public final void setDataDevolucao(Date dataDevolucao) {
-		this.dataDevolucao = dataDevolucao;
+	public void setDevolucao(Date devolucao) {
+		this.devolucao = devolucao;
 	}
 
-	public final Aluno getAluno() {
+	public Aluno getAluno() {
 		return aluno;
 	}
 
-	public final void setAluno(Aluno aluno) {
+	public void setAluno(Aluno aluno) {
 		this.aluno = aluno;
 	}
 
-	public final Livro getLivro() {
+	public Livro getLivro() {
 		return livro;
 	}
 
-	public final void setLivro(Livro livro) {
+	public void setLivro(Livro livro) {
 		this.livro = livro;
 	}
 

@@ -18,7 +18,6 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "autor")
 public class Autor {
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_autor")
@@ -27,62 +26,53 @@ public class Autor {
 	private String nome;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "data_nascimento")
-	private Date dataNascimento;
-
+	private Date nascimento;
 	@Temporal(TemporalType.DATE)
-	@Column(name = "data_obito")
-	private Date dataObito;
+	private Date obito;
 
 	@ManyToMany
 	@JoinTable(name = "muitos_autores_tem_muitos_livros", joinColumns = {
 			@JoinColumn(name = "id_autor") }, inverseJoinColumns = { @JoinColumn(name = "id_livro") })
 	private List<Livro> livros;
 
-	public final Long getIdAutor() {
+	public Long getIdAutor() {
 		return idAutor;
 	}
 
-	public final void setIdAutor(Long idAutor) {
+	public void setIdAutor(Long idAutor) {
 		this.idAutor = idAutor;
 	}
 
-	public final String getNome() {
+	public String getNome() {
 		return nome;
 	}
 
-	public final void setNome(String nome) {
+	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
-	public final Date getDataNascimento() {
-		return dataNascimento;
+	public Date getNascimento() {
+		return nascimento;
 	}
 
-	public final void setDataNascimento(Date dataNascimento) {
-		this.dataNascimento = dataNascimento;
+	public void setNascimento(Date nascimento) {
+		this.nascimento = nascimento;
 	}
 
-	public final Date getDataObito() {
-		return dataObito;
+	public Date getObito() {
+		return obito;
 	}
 
-	public final void setDataObito(Date dataObito) {
-		this.dataObito = dataObito;
+	public void setObito(Date obito) {
+		this.obito = obito;
 	}
 
-	public final List<Livro> getLivros() {
+	public List<Livro> getLivros() {
 		return livros;
 	}
 
-	public final void setLivros(List<Livro> livros) {
+	public void setLivros(List<Livro> livros) {
 		this.livros = livros;
-	}
-
-	@Override
-	public String toString() {
-		return "Autor [idAutor=" + idAutor + ", nome=" + nome + ", dataNascimento=" + dataNascimento + ", dataObito="
-				+ dataObito + "]";
 	}
 
 }

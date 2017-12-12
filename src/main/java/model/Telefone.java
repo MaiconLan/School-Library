@@ -2,7 +2,6 @@ package model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,15 +20,15 @@ public class Telefone {
 
 	private String telefone;
 
-	@ManyToOne(fetch = FetchType.LAZY)  
+	@ManyToOne
 	@JoinColumn(name = "id_aluno")
 	private Aluno aluno;
 
-	public final Long getIdTelefone() {
+	public Long getIdTelefone() {
 		return idTelefone;
 	}
 
-	public final void setIdTelefone(Long idTelefone) {
+	public void setIdTelefone(Long idTelefone) {
 		this.idTelefone = idTelefone;
 	}
 

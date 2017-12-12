@@ -29,14 +29,11 @@ public class Livro {
 
 	private String titulo;
 	private String subtitulo;
-
-	@Column(name = "qtd_paginas")
-	private Integer qtdPaginas;
+	private Integer paginas;
 	private int estoque;
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "data_publicacao")
-	private Date dataPublicacao;
+	@Temporal(value = TemporalType.DATE)
+	private Date publicacao;
 
 	@ManyToOne
 	@JoinColumn(name = "id_estante")
@@ -52,68 +49,76 @@ public class Livro {
 	@ManyToMany(mappedBy = "livros")
 	private List<Autor> autores;
 
-	public final Long getIdLivro() {
+	public Long getIdLivro() {
 		return idLivro;
 	}
 
-	public final void setIdLivro(Long idLivro) {
+	public void setIdLivro(Long idLivro) {
 		this.idLivro = idLivro;
 	}
 
-	public final String getTitulo() {
+	public String getTitulo() {
 		return titulo;
 	}
 
-	public final void setTitulo(String titulo) {
+	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
 
-	public final String getSubtitulo() {
+	public String getSubtitulo() {
 		return subtitulo;
 	}
 
-	public final void setSubtitulo(String subtitulo) {
+	public void setSubtitulo(String subtitulo) {
 		this.subtitulo = subtitulo;
 	}
 
-	public final Integer getQtdPaginas() {
-		return qtdPaginas;
+	public Integer getPaginas() {
+		return paginas;
 	}
 
-	public final void setQtdPaginas(Integer qtdPaginas) {
-		this.qtdPaginas = qtdPaginas;
+	public void setPaginas(Integer paginas) {
+		this.paginas = paginas;
 	}
 
-	public final int getEstoque() {
+	public Date getPublicacao() {
+		return publicacao;
+	}
+
+	public void setPublicacao(Date publicacao) {
+		this.publicacao = publicacao;
+	}
+
+	public int getEstoque() {
 		return estoque;
 	}
 
-	public final void setEstoque(int estoque) {
+	public void setEstoque(int estoque) {
 		this.estoque = estoque;
 	}
 
-	public final Date getDataPublicacao() {
-		return dataPublicacao;
-	}
-
-	public final void setDataPublicacao(Date dataPublicacao) {
-		this.dataPublicacao = dataPublicacao;
-	}
-
-	public final Estante getEstante() {
+	public Estante getEstante() {
 		return estante;
 	}
 
-	public final void setEstante(Estante estante) {
+	public void setEstante(Estante estante) {
 		this.estante = estante;
 	}
 
-	public final Genero getGenero() {
+	public Genero getGenero() {
 		return genero;
 	}
 
-	public final void setGenero(Genero genero) {
+	public void setGenero(Genero genero) {
 		this.genero = genero;
+	}
+
+	public List<Autor> getAutores() {
+		return autores;
+	}
+
+	public void setAutores(List<Autor> autores) {
+		this.autores = autores;
 	}
 
 	public final List<Aluguel> getAlugeis() {
@@ -122,14 +127,6 @@ public class Livro {
 
 	public final void setAlugeis(List<Aluguel> alugeis) {
 		this.alugeis = alugeis;
-	}
-
-	public final List<Autor> getAutores() {
-		return autores;
-	}
-
-	public final void setAutores(List<Autor> autores) {
-		this.autores = autores;
 	}
 
 }

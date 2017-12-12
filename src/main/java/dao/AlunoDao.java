@@ -25,7 +25,7 @@ public class AlunoDao extends GenericDAO<Aluno> {
 			hql.append(" AND a.id_aluno = " + filtro.getIdAluno());
 		}
 		if (isNotNull(filtro.getNome())) {
-			hql.append(" AND a.nome ILIKE = '" + filtro.getNome() + "%'");
+			hql.append(" AND a.nome_completo ILIKE = '" + filtro.getNome() + "%'");
 		}
 		return hql;
 	}

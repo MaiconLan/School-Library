@@ -1,7 +1,10 @@
 package jpautil;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -10,21 +13,21 @@ import javax.persistence.Persistence;
 public final class PersistenceUtil {
 	private static final String UNIT_NAME = "SchoolLibrary";
 	private static final String DATABASE_NAME = "school-library";
-	private static EntityManagerFactory factory;
+	private static EntityManagerFactory FACTORY;
 	public static final ThreadLocal<EntityManager> SESSION = new ThreadLocal<EntityManager>();
 
 	public static EntityManager currentEntityManager() {
-		EntityManager manager = SESSION.get();
+		EntityManager manager = (EntityManager) SESSION.get();
 		if (manager == null) {
 			loadInstance();
-			manager = factory.createEntityManager();
+			manager = FACTORY.createEntityManager();
 			SESSION.set(manager);
 		}
 		return manager;
 	}
 
 	public static void closeEntityManager() {
-		EntityManager manager = SESSION.get();
+		EntityManager manager = (EntityManager) SESSION.get();
 		if (manager != null) {
 			manager.close();
 		}
@@ -32,7 +35,7 @@ public final class PersistenceUtil {
 	}
 
 	private static synchronized void loadInstance() {
-		if (factory == null) {
+		if (FACTORY == null) {
 			try {
 //				Properties properties = new Properties();
 //				FileInputStream fis = new FileInputStream(
@@ -61,7 +64,7 @@ public final class PersistenceUtil {
 				map.put("hibernate.show_sql", "true");
 				map.put("javax.persistence.jdbc.url", ip);
 
-				factory = Persistence.createEntityManagerFactory(UNIT_NAME, map);
+				FACTORY = Persistence.createEntityManagerFactory(UNIT_NAME, map);
 
 			} catch (Exception e) {
 				e.printStackTrace();
