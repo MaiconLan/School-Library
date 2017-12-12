@@ -13,10 +13,17 @@ html, body {
 	overflow: hidden;
 	min-height: 100%;
 	position: absolute;
+	bottom: 10xp;
 	width: 800px;
 }
 
 .page-footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+}
+
+#rodape {
 	position: absolute;
 	bottom: 0;
 	width: 100%;
