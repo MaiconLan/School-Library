@@ -30,7 +30,7 @@ public class Livro {
 	private String titulo;
 	private String subtitulo;
 	private Integer paginas;
-	private int estoque;
+	private Integer estoque;
 
 	@Temporal(value = TemporalType.DATE)
 	private Date publicacao;
@@ -89,11 +89,11 @@ public class Livro {
 		this.publicacao = publicacao;
 	}
 
-	public int getEstoque() {
+	public Integer getEstoque() {
 		return estoque;
 	}
 
-	public void setEstoque(int estoque) {
+	public void setEstoque(Integer estoque) {
 		this.estoque = estoque;
 	}
 

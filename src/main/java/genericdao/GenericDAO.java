@@ -41,7 +41,7 @@ public class GenericDAO<T> {
 	/**
 	 * @property Salvar registros
 	 */
-	public void save(T t) throws NullPointerException, Exception {
+	public void save(T t) {
 		try {
 			em.getTransaction().begin();
 			em.persist(t);
@@ -50,7 +50,11 @@ public class GenericDAO<T> {
 		} catch (PersistenceException e) {
 			em.getTransaction().rollback();
 			e.printStackTrace();
-		}
+			
+		}  catch (Exception e) {
+			em.getTransaction().rollback();
+			e.printStackTrace();
+		} 
 	}
 
 	/**

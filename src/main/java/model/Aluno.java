@@ -1,6 +1,5 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -11,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -33,26 +33,20 @@ public class Aluno {
 	@Temporal(TemporalType.DATE)
 	private Date nascimento;
 
-	@OneToMany(mappedBy = "aluno", targetEntity = Telefone.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<Telefone> telefones;
-	@OneToMany(mappedBy = "aluno", targetEntity = Email.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<Email> emails;
-	@OneToMany(mappedBy = "aluno", targetEntity = Endereco.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<Endereco> enderecos;
-	@OneToMany(mappedBy = "aluno", targetEntity = Aluguel.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private List<Aluguel> alugeis;
+	private String telefone;
+
+	private String email;
+
+	private String endereco;
 
 	private boolean ativo;
 
+	@OneToMany(mappedBy = "aluno", targetEntity = Aluguel.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Aluguel> alugueis;
+
 	public Aluno() {
-		telefones = new ArrayList<Telefone>();
-		emails = new ArrayList<Email>();
-		enderecos = new ArrayList<Endereco>();
 		ativo = Constante.ATIVO;
 	}
-
-	@OneToOne(fetch = FetchType.LAZY)
-	private Aluguel aluguel;
 
 	public Long getIdAluno() {
 		return idAluno;
@@ -78,36 +72,36 @@ public class Aluno {
 		this.nascimento = nascimento;
 	}
 
-	public final List<Telefone> getTelefones() {
-		return telefones;
+	public final String getTelefone() {
+		return telefone;
 	}
 
-	public final void setTelefones(List<Telefone> telefones) {
-		this.telefones = telefones;
+	public final void setTelefone(String telefone) {
+		this.telefone = telefone;
 	}
 
-	public final List<Email> getEmails() {
-		return emails;
+	public final String getEmail() {
+		return email;
 	}
 
-	public final void setEmails(List<Email> emails) {
-		this.emails = emails;
+	public final void setEmail(String email) {
+		this.email = email;
 	}
 
-	public final List<Endereco> getEnderecos() {
-		return enderecos;
+	public final String getEndereco() {
+		return endereco;
 	}
 
-	public final void setEnderecos(List<Endereco> enderecos) {
-		this.enderecos = enderecos;
+	public final void setEndereco(String endereco) {
+		this.endereco = endereco;
 	}
 
-	public Aluguel getAluguel() {
-		return aluguel;
+	public final List<Aluguel> getAlugueis() {
+		return alugueis;
 	}
 
-	public void setAluguel(Aluguel aluguel) {
-		this.aluguel = aluguel;
+	public final void setAlugueis(List<Aluguel> alugueis) {
+		this.alugueis = alugueis;
 	}
 
 	public boolean isAtivo() {
@@ -118,19 +112,11 @@ public class Aluno {
 		this.ativo = ativo;
 	}
 
-	public final List<Aluguel> getAlugeis() {
-		return alugeis;
-	}
-
-	public final void setAlugeis(List<Aluguel> alugeis) {
-		this.alugeis = alugeis;
-	}
-
 	@Override
 	public String toString() {
 		return "Aluno [id_aluno=" + idAluno + ", nome_completo=" + nome + ", data_nascimento=" + nascimento
-				+ ", telefones=" + telefones + ", emails=" + emails + ", enderecos=" + enderecos + ", ativo=" + ativo
-				+ ", aluguel=" + aluguel + "]";
+				+ ", telefones=" + telefone + ", emails=" + email + ", enderecos=" + endereco + ", ativo=" + ativo
+				+ ", aluguel=" + alugueis + "]";
 	}
 
 }
