@@ -14,21 +14,20 @@
 	<ui:composition template="/template/layout.xhtml">
 		<ui:define name="conteudo">
 			<h:form styleClass="login">
-				<p:messages id="messages" />
+				<p:growl id="messages" showDetail="true"/>
 
 				<h:panelGrid columns="1">
-						<p:inputText styleClass="input-field col s6" id="usuario" value=""
-							placeholder="Usuário"></p:inputText>
+					<p:inputText styleClass="input-field col s6" id="usuario"
+						value="#{loginWebBean.filtro.usuario}" placeholder="Usuário" />
 
-						<p:password styleClass="input-field col s12" placeholder="Senha" />
+					<p:password styleClass="input-field col s12"
+						value="#{loginWebBean.filtro.senha}" placeholder="Senha" />
 
-						<h:panelGrid columns="2">
-							<h:commandButton styleClass="waves-effect waves-light btn"
-								value="Login" >
-								<i class="material-icons prefix">person</i>
-							</h:commandButton>
+					<h:commandButton styleClass="waves-effect waves-light btn"
+						value="Login" actionListener="#{loginWebBean.logar()}">
+						<i class="material-icons prefix">person</i>
+					</h:commandButton>
 
-						</h:panelGrid>
 				</h:panelGrid>
 			</h:form>
 		</ui:define>

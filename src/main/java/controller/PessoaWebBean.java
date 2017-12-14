@@ -7,8 +7,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
-import business.PessoaBusiness;
 import model.Pessoa;
+import service.PessoaService;
 
 @ManagedBean(name = "pessoaWebBean")
 public class PessoaWebBean implements Serializable {
@@ -17,21 +17,21 @@ public class PessoaWebBean implements Serializable {
 
 	private Pessoa pessoa;
 
-	private PessoaBusiness pessoaBusinnes;
+	private PessoaService pessoaService;
 
 	@PostConstruct
 	public void initialize() {
 		pessoa = new Pessoa();
-		pessoaBusinnes = new PessoaBusiness();
 	}
 
-	public void salvar() {
+	public String salvar() {
+		String tela = "";
 		try {
-			
-			pessoaBusinnes.salvar(pessoa);
+			pessoaService.salvar(pessoa);
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Salvo",
 					"Pessoa " + pessoa.getNome() + " salvo com sucesso!"));
 			pessoa = new Pessoa();
+			tela = "/index.xhtml";
 
 		} catch (NullPointerException e) {
 			e.printStackTrace();
@@ -40,10 +40,12 @@ public class PessoaWebBean implements Serializable {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro", "Erro Genérico!"));
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro", "Erro Genérico!"));
 
 		}
 
+		return tela;
 	}
 
 	public Pessoa getPessoa() {
@@ -52,6 +54,14 @@ public class PessoaWebBean implements Serializable {
 
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
+	}
+
+	public PessoaService getPessoaService() {
+		return pessoaService;
+	}
+
+	public void setPessoaService(PessoaService pessoaService) {
+		this.pessoaService = pessoaService;
 	}
 
 }

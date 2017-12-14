@@ -2,6 +2,8 @@ package business;
 
 import java.util.List;
 
+import javax.persistence.PersistenceException;
+
 import dao.PessoaDao;
 import model.Pessoa;
 import service.PessoaService;
@@ -19,7 +21,7 @@ public class PessoaBusiness implements PessoaService {
 		return pessoaDao.listaFiltro(filtro);
 	}
 
-	public void salvar(Pessoa pessoa) throws NullPointerException, Exception {
+	public void salvar(Pessoa pessoa) throws NullPointerException, PersistenceException, Exception {
 		pessoa.getLogin().setPessoa(pessoa);
 		if (pessoa.getIdPessoa() == null) {
 			pessoaDao.save(pessoa);

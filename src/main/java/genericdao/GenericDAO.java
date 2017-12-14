@@ -41,7 +41,7 @@ public class GenericDAO<T> {
 	/**
 	 * @property Salvar registros
 	 */
-	public void save(T t) {
+	public void save(T t) throws NullPointerException, Exception, PersistenceException {
 		try {
 			em.getTransaction().begin();
 			em.persist(t);
@@ -50,17 +50,19 @@ public class GenericDAO<T> {
 		} catch (PersistenceException e) {
 			em.getTransaction().rollback();
 			e.printStackTrace();
-			
-		}  catch (Exception e) {
+			throw new PersistenceException();
+
+		} catch (Exception e) {
 			em.getTransaction().rollback();
 			e.printStackTrace();
-		} 
+			throw new Exception();
+		}
 	}
 
 	/**
 	 * @property Atualizar registros
 	 */
-	public void update(T t) throws NullPointerException, Exception {
+	public void update(T t) throws NullPointerException, Exception, PersistenceException {
 		try {
 			em.getTransaction().begin();
 			em.merge(t);
@@ -69,7 +71,12 @@ public class GenericDAO<T> {
 		} catch (PersistenceException e) {
 			em.getTransaction().rollback();
 			e.printStackTrace();
+			throw new PersistenceException();
 
+		} catch (Exception e) {
+			em.getTransaction().rollback();
+			e.printStackTrace();
+			throw new Exception();
 		}
 	}
 
