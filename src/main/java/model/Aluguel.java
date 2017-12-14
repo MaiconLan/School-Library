@@ -32,10 +32,6 @@ public class Aluguel {
 	private Date devolucao;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_aluno")
-	private Aluno aluno;
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_livro")
 	private Livro livro;
 
@@ -69,14 +65,6 @@ public class Aluguel {
 
 	public void setDevolucao(Date devolucao) {
 		this.devolucao = devolucao;
-	}
-
-	public Aluno getAluno() {
-		return aluno;
-	}
-
-	public void setAluno(Aluno aluno) {
-		this.aluno = aluno;
 	}
 
 	public Livro getLivro() {

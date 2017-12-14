@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+<head>
+<title>School Library</title>
+</head>
+<body>
+	<ui:composition template="/template/layout.xhtml">
+		<ui:define name="conteudo">
+			<h:form styleClass="cadastro-pessoa" id="pessoa">
+				<p:growl id="messages" showDetail="true" />
+				<center>
+					<h5>Cadastro de Pessoa</h5>
+				</center>
+
+				<h:panelGrid columns="2">
+
+					<p:inputText styleClass="input-field col s6" id="nome"
+						placeholder="Nome" value="#{pessoaWebBean.pessoa.nome}" />
+
+					<p:calendar id="nascimento"
+						value="#{pessoaWebBean.pessoa.nascimento}" pattern="dd/MM/yyyy"
+						mask="true" placeholder="Data de Nascimento" />
+					<p:inputMask placeholder="Telefone" mask="(99) ?9 9999-9999"
+						id="telefone" value="#{pessoaWebBean.pessoa.telefone}"
+						required="true" requiredMessage="Não deixe campos em Branco" />
+
+					<p:inputText styleClass="input-field col s6" id="endereco"
+						placeholder="Endereço" value="#{pessoaWebBean.pessoa.endereco}" />
+
+					<p:inputText styleClass="validate" type="email" id="email"
+						value="#{pessoaWebBean.pessoa.email}" placeholder="E-mail" />
+
+					<p:outputLabel></p:outputLabel>
+					<h:panelGrid columns="2">
+						<p:outputLabel for="genero" value="Gênero" />
+						<p:selectOneRadio id="genero"
+							value="#{pessoaWebBean.pessoa.genero}">
+							<f:selectItem itemLabel="Masculino" itemValue="M" />
+							<f:selectItem itemLabel="Feminino" itemValue="F" />
+						</p:selectOneRadio>
+					</h:panelGrid>
+				</h:panelGrid>
+
+				<h:panelGrid columns="2">
+
+					<p:inputText styleClass="input-field col s6" id="usuario"
+						placeholder="Usuario"
+						value="#{pessoaWebBean.pessoa.login.usuario}" />
+
+					<p:password styleClass="input-field col s6" id="senha"
+						placeholder="Senha" value="#{pessoaWebBean.pessoa.login.senha}" />
+
+					<p:outputLabel for="tipoLogin" value="Tipo Pessoa" />
+					<p:selectOneRadio id="tipoLogin"
+						value="#{pessoaWebBean.pessoa.login.tipoLogin}">
+						<f:selectItem itemLabel="Aluno" itemValue="A" />
+						<f:selectItem itemLabel="Colaborador" itemValue="C" />
+					</p:selectOneRadio>
+				</h:panelGrid>
+
+				<p:commandButton value="Cadastrar"
+					styleClass="waves-effect waves-light btn"
+					actionListener="#{pessoaWebBean.salvar}" update="@form" />
+			</h:form>
+		</ui:define>
+	</ui:composition>
+
+</body>
+</html>
