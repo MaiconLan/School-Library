@@ -4,6 +4,8 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import model.Login;
+
 public class Criptografia {
 
 	public static String criptofragar(String cript) throws NoSuchAlgorithmException, UnsupportedEncodingException {
@@ -16,5 +18,10 @@ public class Criptografia {
 		}
 		return hexString.toString();
 	}
-	
+
+	public static Login criptografar(Login login) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+		login.setSenha(criptofragar(login.getSenha()));
+		return login;
+	}
+
 }

@@ -12,21 +12,42 @@
 <body>
 
 	<ui:composition>
-		<nav>
-		<div class="light-green darken-2 nav-wrapper">
-			<a href="index.xhtml" class="brand-logo logo"> <i
-				class="material-icons icone-logo">book</i>School Library
-			</a>
+		<nav> <h:form>
+			<div class="light-green darken-2 nav-wrapper">
+				<a href="index.xhtml" class="brand-logo logo"> <i
+					class="material-icons icone-logo">book</i>School Library
+				</a>
 
-			<ul id="nav-mobile" class="right hide-on-med-and-down">
-				<li><a href="#">Livros</a></li>
-				<li><a href="cadastro-pessoa.xhtml">Alunos<span class="new badge blue">2</span></a></li>
-				<li><a href="#">Prateleiras</a></li>
+				<ul id="nav-mobile" class="right hide-on-med-and-down">
 
-				<li><a href="login.xhtml">Login</a></li>
-			</ul>
-		</div>
-		</nav>
+					<li><h:link value="Login" outcome="login.xhtml"
+							rendered="#{loginWebBean.pessoaLogada == null}"
+							icon="ui-icon-person" /></li>
+
+					<li><h:link
+							value="Usuario #{loginWebBean.pessoaLogada.pessoa.nome}"
+							outcome="login.xhtml"
+							rendered="#{loginWebBean.pessoaLogada != null}"
+							icon="ui-icon-person" /></li>
+					<li><h:commandLink action="#{loginWebBean.deslogar()}" value="Deslogar"
+							rendered="#{loginWebBean.pessoaLogada != null}" /></li>
+
+				</ul>
+			</div>
+		</h:form> </nav>
+
+		<h:form>
+			<p:menubar styleClass="light-green darken-2 nav-wrapper white-text">
+				<p:submenu label="Cadastros"
+					rendered="#{loginWebBean.pessoaLogada != null}">
+					<p:menuitem value="Pessoa" url="cadastro-pessoa.xhtml"
+						icon="ui-icon-person" />
+					<p:menuitem value="Livro" url="#" icon="ui-icon-book" />
+					<p:menuitem value="Prateleira" url="#" icon="fa fa-fw fa-archive" />
+				</p:submenu>
+
+			</p:menubar>
+		</h:form>
 	</ui:composition>
 
 </body>

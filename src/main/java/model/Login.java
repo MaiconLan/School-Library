@@ -27,7 +27,7 @@ public class Login {
 
 	private String senha;
 
-	@OneToOne(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_pessoa")
 	private Pessoa pessoa;
 

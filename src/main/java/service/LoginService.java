@@ -1,14 +1,14 @@
 package service;
 
 import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+
+import javax.persistence.NoResultException;
 
 import model.Login;
 
-public interface LoginService extends Serializable {
+public interface LoginService extends Serializable{
 
-	Login logar(Login login) throws NoSuchAlgorithmException, UnsupportedEncodingException, SQLException;
+	Login logar(Login login) throws NoResultException, SQLException, Exception;
 
 }
