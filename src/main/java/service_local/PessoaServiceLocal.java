@@ -1,5 +1,7 @@
 package service_local;
 
+import java.util.List;
+
 import javax.persistence.PersistenceException;
 
 import business.PessoaBusiness;
@@ -12,7 +14,11 @@ public class PessoaServiceLocal implements PessoaService {
 
 	private PessoaBusiness pessoaBusiness = new PessoaBusiness();
 
-	public Pessoa salvar(Pessoa pessoa) throws NullPointerException, PersistenceException, Exception {
-		return pessoaBusiness.salvar(pessoa);
+	public Pessoa salvar(Pessoa pessoa, Boolean isCriarLogin) throws NullPointerException, PersistenceException, Exception {
+		return pessoaBusiness.salvar(pessoa, isCriarLogin);
+	}
+	
+	public List<Pessoa> listar(Pessoa filtro) throws NullPointerException, PersistenceException, Exception {
+		return pessoaBusiness.listar(filtro);
 	}
 }

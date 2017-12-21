@@ -19,21 +19,23 @@
 				</center>
 				<p:tabView>
 					<p:tab title="Pessoa">
-						<h:panelGrid columns="4">
+						<h:panelGrid id="grid" columns="4">
 							<p:outputLabel value="Nome" />
 							<p:inputText styleClass="input-field col s6" id="nome"
-								placeholder="Nome" value="#{pessoaWebBean.pessoa.nome}" />
+								placeholder="Nome" value="#{pessoaWebBean.pessoa.nome}" 
+								required="true"
+								requiredMessage="Nome é de preenchimento obrigatório" />
 
 							<p:outputLabel value="Data de Nascimento" />
 							<p:calendar id="nascimento"
 								value="#{pessoaWebBean.pessoa.nascimento}" pattern="dd/MM/yyyy"
 								mask="true" placeholder="Data de Nascimento" />
 
-
 							<p:outputLabel value="Telefone" />
 							<p:inputMask placeholder="Telefone" mask="(99) ?9 9999-9999"
 								id="telefone" value="#{pessoaWebBean.pessoa.telefone}"
-								required="true" requiredMessage="Não deixe campos em Branco" />
+								required="false"
+								requiredMessage="Telefone é de preenchimento obrigatório" />
 
 							<p:outputLabel value="Endereço" />
 							<p:inputText styleClass="input-field col s6" id="endereco"
@@ -50,14 +52,17 @@
 								<f:selectItem itemLabel="Feminino" itemValue="F" />
 							</p:selectOneRadio>
 
-							<p:outputLabel value="Necessita Login: " />
-							<p:selectBooleanCheckbox value="#{pessoaWebBean.createUsuario}">
-								<p:ajax update="@form" />
-							</p:selectBooleanCheckbox>
+							<p:outputLabel value="Criar Login?" />
+
+							<p:selectBooleanButton id="criarLoginBooleanButton"
+								value="#{pessoaWebBean.isCriarLogin}" onLabel="Sim"
+								offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close">
+								<f:ajax execute="pessoa" render="pessoa" ></f:ajax>
+							</p:selectBooleanButton>
 
 						</h:panelGrid>
 					</p:tab>
-					<p:tab title="Login" rendered="#{pessoaWebBean.createUsuario}">
+					<p:tab title="Login" rendered="#{pessoaWebBean.isCriarLogin}">
 						<p:panelGrid columns="2">
 							<p:outputLabel value="Usuário" />
 							<p:inputText styleClass="input-field col s6" id="usuario"
@@ -77,10 +82,57 @@
 						</p:panelGrid>
 					</p:tab>
 				</p:tabView>
-				<br/>
+				<br />
 				<p:commandButton value="Cadastrar"
 					styleClass="waves-effect waves-light btn"
-					actionListener="#{pessoaWebBean.salvar}" update="@form" />
+					actionListener="#{pessoaWebBean.salvar}" >
+					<p:ajax update=":pessoa :pessoas" ></p:ajax>
+					</p:commandButton>
+			</h:form>
+
+			<h:form styleClass="lista-pessoas" id="pessoas">
+				<p:dataTable var="pes" value="#{pessoaWebBean.pessoas}">
+					<f:facet name="header">
+        Pessoas
+    </f:facet>
+
+					<p:column headerText="Id">
+						<h:outputText value="#{pes.idPessoa}" />
+					</p:column>
+
+					<p:column headerText="Nome">
+						<h:outputText value="#{pes.nome}" />
+					</p:column>
+
+					<p:column headerText="Telefone">
+						<h:outputText value="#{pes.telefone}" />
+					</p:column>
+
+					<p:column headerText="Email">
+						<h:outputText value="#{pes.email}" />
+					</p:column>
+
+					<p:column headerText="Email">
+						<h:outputText value="#{pes.endereco}" />
+					</p:column>
+
+					<p:column headerText="Data Nascimento">
+						<h:outputText value="#{pes.nascimento}" />
+					</p:column>
+
+					<p:column style="width:32px;text-align: center">
+						<p:commandButton update=":pessoas :pessoa" icon="ui-icon-search"
+							title="View">
+							<f:setPropertyActionListener value="#{pes}"
+								target="#{pessoaWebBean.pessoa}" />
+						</p:commandButton>
+					</p:column>
+
+					<f:facet name="footer">
+        Foram encontradas #{pessoaWebBean.pessoas.size()} pessoas.
+    </f:facet>
+				</p:dataTable>
+
 			</h:form>
 		</ui:define>
 	</ui:composition>

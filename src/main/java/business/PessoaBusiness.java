@@ -15,20 +15,28 @@ public class PessoaBusiness implements PessoaService {
 
 	private PessoaDao pessoaDao = new PessoaDao();
 
-	public List<Pessoa> listaAluno(Pessoa filtro) {
+	public List<Pessoa> listar(Pessoa filtro) {
 		return pessoaDao.listaFiltro(filtro);
 	}
 
-	public Pessoa salvar(Pessoa pessoa) throws NullPointerException, PersistenceException, Exception {
-		pessoa.setLogin(Criptografia.criptografar(pessoa.getLogin()));
-		pessoa.getLogin().setPessoa(pessoa);
-		
+	public Pessoa salvar(Pessoa pessoa, Boolean isCriarLogin)
+			throws NullPointerException, PersistenceException, Exception {
+
+		if (isCriarLogin) {
+			pessoa.setLogin(Criptografia.criptografar(pessoa.getLogin()));
+			pessoa.getLogin().setPessoa(pessoa);
+		} else {
+			pessoa.setLogin(null);
+		}
+
 		if (pessoa.getIdPessoa() == null) {
 			pessoaDao.save(pessoa);
 		} else {
 			pessoaDao.update(pessoa);
 		}
+
 		return pessoa;
 	}
+	
 
 }

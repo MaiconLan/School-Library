@@ -12,22 +12,24 @@ public class PessoaDao extends GenericDAO<Pessoa> {
 		StringBuilder hql = new StringBuilder();
 		hql.append(" FROM Pessoa p ");
 
-		if (filtro != null) {
-			hql.append("WHERE p.id_pessoa IS NOT NULL");
+		if (isNotNull(filtro)) {
+			hql.append(" WHERE p.id_pessoa IS NOT NULL ");
 			populaFiltros(filtro, hql);
 		}
 
 		return em.createQuery(hql.toString()).setMaxResults(100).getResultList();
 	}
 
-	public StringBuilder populaFiltros(Pessoa filtro, StringBuilder hql) {
+	public void populaFiltros(Pessoa filtro, StringBuilder hql) {
 		if (isNotNull(filtro.getIdPessoa())) {
-			hql.append(" AND p.id_pessoa = " + filtro.getIdPessoa());
+			hql.append(" AND p.id_pessoa = ");
+			hql.append(filtro.getIdPessoa());
 		}
 		if (isNotNull(filtro.getNome())) {
-			hql.append(" AND p.nome ILIKE = '" + filtro.getNome() + "%'");
+			hql.append(" AND p.nome ILIKE = '%");
+			hql.append(filtro.getNome());
+			hql.append("%' ");
 		}
-		return hql;
 	}
 
 	public Boolean isNotNull(Object o) {

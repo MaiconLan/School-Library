@@ -1,11 +1,14 @@
 package controller;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import javax.persistence.PersistenceException;
 
 import model.Pessoa;
 import service_local.PessoaServiceLocal;
@@ -15,8 +18,9 @@ public class PessoaWebBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Pessoa pessoa;
-	private boolean isCreateUsuario;
+	private Pessoa pessoa, filtro;
+	private List<Pessoa> pessoas;
+	private Boolean isCriarLogin;
 
 	private PessoaServiceLocal pessoaServiceLocal;
 
@@ -24,14 +28,15 @@ public class PessoaWebBean implements Serializable {
 	public void initialize() {
 		pessoa = new Pessoa();
 		pessoaServiceLocal = new PessoaServiceLocal();
+		isCriarLogin = Boolean.FALSE;
+		listar();
 	}
 
 	public void salvar() {
 		try {
-			pessoaServiceLocal.salvar(pessoa);
+			pessoaServiceLocal.salvar(pessoa, isCriarLogin);
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Salvo",
 					"Pessoa " + pessoa.getNome() + " salvo com sucesso!"));
-			pessoa = new Pessoa();
 
 		} catch (NullPointerException e) {
 			e.printStackTrace();
@@ -45,6 +50,24 @@ public class PessoaWebBean implements Serializable {
 
 		}
 
+		pessoa = new Pessoa();
+	}
+	
+	public void listar() {
+		try {
+			pessoas = new ArrayList<Pessoa>();
+			pessoas = pessoaServiceLocal.listar(filtro);
+			
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+			
+		} catch (PersistenceException e) {
+			e.printStackTrace();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+		}
 	}
 
 	public Pessoa getPessoa() {
@@ -55,12 +78,20 @@ public class PessoaWebBean implements Serializable {
 		this.pessoa = pessoa;
 	}
 
-	public final boolean isCreateUsuario() {
-		return isCreateUsuario;
+	public Boolean getIsCriarLogin() {
+		return isCriarLogin;
 	}
 
-	public final void setCreateUsuario(boolean isCreateUsuario) {
-		this.isCreateUsuario = isCreateUsuario;
+	public void setIsCriarLogin(Boolean isCriarLogin) {
+		this.isCriarLogin = isCriarLogin;
+	}
+
+	public List<Pessoa> getPessoas() {
+		return pessoas;
+	}
+
+	public void setPessoas(List<Pessoa> pessoas) {
+		this.pessoas = pessoas;
 	}
 
 }

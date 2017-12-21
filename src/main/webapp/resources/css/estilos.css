@@ -12,10 +12,9 @@ html, body {
 
 .conteudo {
 	overflow: hidden;
-	min-height: 100%;
 	position: absolute;
 	bottom: 10xp;
-	width: 800px;
+	width: 80%;
 }
 
 .page-footer {
@@ -39,12 +38,20 @@ html, body {
 	background: #fff;
 }
 
-.cadastro-pessoa, .cadastro-login  {
+.cadastro-pessoa, .cadastro-login {
 	width: 800px;
 	padding: 50px;
 	margin-top: 5%;
 	margin-bottom: 5%;
-	border: 1px solid #ee6e73;
 	padding: 5%;
+	background: #fff;
+}
+
+.lista-pessoas {
+	width: 90%;
+	padding: 1%;
+	margin-top: 5%;
+	margin-bottom: 5%;
+	border: 1px solid #ee6e73;
 	background: #fff;
 }
